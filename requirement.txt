@@ -1,0 +1,12 @@
+asgiref==3.2.10
+autopep8==1.5.3
+crispy-forms-materialize==0.2
+Django==3.0.7
+django-crispy-forms==1.9.1
+django-materialize-css==0.0.1
+django-materializecss-form==1.1.17
+Pillow==7.1.2
+pycodestyle==2.6.0
+pytz==2020.1
+sqlparse==0.3.1
+toml==0.10.1
