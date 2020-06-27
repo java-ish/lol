@@ -1,0 +1,71 @@
+{%extends 'entry/base.html'%} {%block content%}
+<div class="container-section">
+  <div class="row">
+    <div class="col s12 m8 offset-m2 l6 offset-l3">
+      <h1 style="font-size: 2em; font-family: lato;">
+        Posts by
+        <span class="amber-text">{{view.kwargs.username}}</span>
+        ({{page_obj.paginator.count}})
+      </h1>
+    </div>
+  </div>
+</div>
+<div>
+  {%for post in posts%}
+  <div class="container-section">
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l6 offset-l3">
+        <div class="card-panel grey lighten-5 z-depth-1">
+          <p
+            class="author-heading"
+            style="font-size: 1.3em; font-weight: bolder;"
+          >
+            <a href="{%url 'user-posts' post.author.username%}"
+              >{{post.author}}</a
+            >
+            <!-- dropdown -->
+
+            <!-- Dropdown Structure -->
+            {% if post.author == user%}
+            <a
+              class="dropdown-trigger right"
+              href="{%url 'post-detail' post.id%}"
+              data-target="dropdown1"
+              ><span class="material-icons">
+                more_vert
+              </span></a
+            >
+            {%endif%}
+          </p>
+
+          <p class="author-heading" style="font-size: 1em; font-weight: 400;">
+            {{post.date_posted|date:"F d, Y"}}
+          </p>
+          <div class="divider"></div>
+          <p
+            class="author-heading"
+            style="font-size: 15px; font-family: ubuntu; margin-top: 1em;"
+          >
+            {{post.content}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+
+{%if is_paginated%}{%if page_obj.has_next%}
+<div class="container-section">
+  <div class="row">
+    <div class="col s12 l2 offset-l5">
+      <a
+        class="waves-effect waves-light blue darken-4 btn"
+        href="?page={{page_obj.next_page_number}}"
+      >
+        More ...</a
+      >
+    </div>
+  </div>
+</div>
+{%endif%}{%endif%} {%endblock%}

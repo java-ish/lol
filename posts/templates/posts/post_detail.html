@@ -1,0 +1,50 @@
+{%extends 'entry/base.html'%} {%block content%}
+<div>
+  <div class="container-section">
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l6 offset-l3">
+        <div class="card-panel grey lighten-5 z-depth-1">
+          <p
+            class="author-heading"
+            style="font-size: 1.3em; font-weight: bolder;"
+          >
+            <a href="{%url 'user-posts' object.author.username%}"
+              >{{object.author}}</a
+            >
+          </p>
+
+          <p class="author-heading" style="font-size: 1em; font-weight: 400;">
+            {{object.date_posted|date:"F d, Y"}}
+          </p>
+          <div class="divider"></div>
+          <p
+            class="author-heading"
+            style="font-size: 15px; font-family: ubuntu; margin-top: 1em;"
+          >
+            {{object.content}}
+          </p>
+
+          {% if object.author == user%}
+          <div class="divider"></div>
+          <div class="" style="margin-top: 1em;">
+            <a
+              class="waves-effect waves-light blue darken-4 btn"
+              href="{%url 'post-update' object.id%}"
+            >
+              Update</a
+            >
+
+            <a
+              class="waves-effect waves-light red darken-4 btn"
+              href="{%url 'post-delete' object.id%}"
+            >
+              Delete</a
+            >
+          </div>
+          {%endif%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}

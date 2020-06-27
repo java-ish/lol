@@ -1,0 +1,36 @@
+{%extends 'entry/base.html'%} {%load static%} {%block content%}
+<div class="container-section">
+  <div class="row display_form">
+    <div class="col s12 m8 offset-m2 l4 offset-l4">
+      <div class="hoverable">
+        <div class="card amber accent-1">
+          <div class="card-content white-text center">
+            <span class="card-title center-align">Join Today</span>
+            <img
+              class="responsive-img"
+              src="{% static 'entry/logo.png'%}"
+              alt="Not available!"
+            />
+            <p>
+              Hi there, Welcome to LOL community! Let's sign up and we are good
+              to go...
+            </p>
+          </div>
+          <div class="card-action">
+            <a
+              class="waves-effect waves-light amber darken-4 btn"
+              href="{%url 'lol-signup'%}"
+              >Sign Up</a
+            >
+            <a
+              class="waves-effect waves-light amber darken-4 btn"
+              href="{%url 'lol-login'%}"
+              >Log In</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}

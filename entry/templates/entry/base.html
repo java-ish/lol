@@ -1,0 +1,167 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lol - Think meme!</title>
+
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <!-- Material icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="{%static 'entry/main.css'%}" />
+
+    <!-- jquery cdn -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- title icon -->
+    <link rel="shortcut icon" href="{% static 'entry/logo.PNG'%}" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <div>
+      <nav>
+        <div class="nav-wrapper container">
+          <a class="brand-logo">LOL</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+            ><i class="material-icons">menu</i></a
+          >
+          <ul class="right hide-on-med-and-down">
+            {%if user.is_authenticated%}
+            <li><a href="{%url 'lol-blog'%}">Home</a></li>
+            <li><a href="{%url 'post-create'%}">New Post</a></li>
+            <li><a href="{%url 'lol-profile'%}">{{user.username}}</a></li>
+            <li>
+              <a href="{%url 'lol-logout'%}">Log Out</a>
+            </li>
+            {%else%}
+            <li><a href="{%url 'lol-home'%}">Home</a></li>
+            <li><a href="{%url 'lol-signup'%}">Sign Up</a></li>
+            <li><a href="{%url 'lol-login'%}">Log In</a></li>
+            {%endif%}
+          </ul>
+        </div>
+      </nav>
+
+      <ul class="sidenav" id="mobile-demo">
+        {%if user.is_authenticated%}
+        <li><a href="{%url 'lol-blog'%}">Home</a></li>
+        <li><a href="{%url 'post-create'%}">New Post</a></li>
+        <li><a href="{%url 'lol-profile'%}">{{user.username}}</a></li>
+        <li>
+          <a href="{%url 'lol-logout'%}">Log Out</a>
+        </li>
+        {%else%}
+        <li><a href="{%url 'lol-home'%}">Home</a></li>
+        <li><a href="{%url 'lol-signup'%}">Sign Up</a></li>
+        <li><a href="{%url 'lol-login'%}">Log In</a></li>
+        {%endif%}
+      </ul>
+    </div>
+
+    <!-- main -->
+    {%if messages%} {%for message in messages%}
+    <div class="container-section">
+      <div class="row">
+        <div class="col s12 m8 offset-m2 l4 offset-l6">
+          <!-- checking for messages -->
+          {%if message.tags == 'info'%}
+          <div class="card-panel message-card hoverable blue-text">
+            {{message}}
+            <i
+              class="close material-icons right"
+              style="cursor: pointer;"
+              onclick="$('.message-card').addClass('closure')"
+              >close</i
+            >
+          </div>
+          {%elif message.tags == 'success'%}
+          <div class="card-panel message-card hoverable green-text">
+            {{message}}
+            <i
+              class="close material-icons right"
+              style="cursor: pointer;"
+              onclick="$('.message-card').addClass('closure')"
+              >close</i
+            >
+          </div>
+          {%elif message.tags == 'error'%}
+          <div class="card-panel message-card hoverable red-text">
+            {{message}}
+            <i
+              class="close material-icons right"
+              style="cursor: pointer;"
+              onclick="$('.message-card').addClass('closure')"
+              >close</i
+            >
+          </div>
+          {%elif message.tags == 'warning'%}
+          <div class="card-panel message-card hoverable yellow-text">
+            {{message}}
+            <i
+              class="close material-icons right"
+              style="cursor: pointer;"
+              onclick="$('.message-card').addClass('closure')"
+              >close</i
+            >
+          </div>
+          {%endif%}
+        </div>
+      </div>
+    </div>
+    {%endfor%} {%endif%} {%block content%} {%endblock%}
+
+    <!-- footer -->
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="blue-grey-text lightne-5 container">
+          © 2014 Copyright Manish
+          <a class="right" href="#!">More Links</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- script for navbar -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var elems = document.querySelectorAll(".sidenav");
+        var instances = M.Sidenav.init(elems, options);
+      });
+
+      // Or with jQuery
+
+      $(document).ready(function () {
+        $(".sidenav").sidenav();
+      });
+    </script>
+
+    <!-- dropdown -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var elems = document.querySelectorAll(".dropdown-trigger");
+        var instances = M.Dropdown.init(elems, options);
+      });
+
+      // Or with jQuery
+
+      $(".dropdown-trigger").dropdown();
+    </script>
+  </body>
+</html>
